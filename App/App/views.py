@@ -7,7 +7,7 @@ from django.http import HttpResponse
 # Create your views here.
 class AllToDos(ListView):
     model = ToDoItem
-    template_name = "Project/index.html"
+    template_name = "index.html"
 
 
 # def index(request): #new
