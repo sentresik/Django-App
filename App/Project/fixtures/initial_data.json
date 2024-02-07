@@ -1,0 +1,9 @@
+{
+    "model": "Project.ToDoItem",
+    "pk": 1,
+    "fields": {
+        "text": "Buy groceries",
+        "due_date": "2024-02-07"
+    }
+}
+// Add more objects here ...
