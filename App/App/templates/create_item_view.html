@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Item for {{ list.name }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <h1>Create New Item for {{ list.name }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="text">Text:</label>
+        <input type="text" name="text" id="text" required>
+        <br>
+        <label for="due_date">Due Date:</label>
+        <input type="date" name="due_date" id="due_date">
+        <br>
+        <button type="submit">Add Item</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,25 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Item: {{ item.text }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <h1>Edit Item: {{ item.text }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="text">Text:</label>
+        <input type="text" name="text" id="text" value="{{ item.text }}" required>
+        <br>
+        <label for="due_date">Due Date:</label>
+        <input type="date" name="due_date" id="due_date" value="{{ item.due_date }}">
+        <br>
+        <input type="checkbox" name="is_completed" id="is_completed" {% if item.is_completed %}checked{% endif %}>
+        <label for="is_completed">Mark as Completed</label>
+        <br>
+        <button type="submit">Save Changes</button>
+    </form>
+</body>
+</html>
