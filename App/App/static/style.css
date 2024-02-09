@@ -84,5 +84,17 @@ button {
 }
 
 span {
-    display: none
+    font-size: 16px;
+    font-family: 'Pacifico', cursive;
+    color: #CCC;
+    margin: 0 auto;
+    display: block;
+}
+
+#text {
+    font-size: 16px;
+    font-family: 'Pacifico', cursive;
+    color: #CCC;
+    margin: 0 auto;
+    display: block;
 }

@@ -16,6 +16,7 @@
         {% if not item.is_completed %}
         <a href="#">{{ item.text }}</a>
         &nbsp; (Due: {{ item.due_date }})
+        <a href="{% url 'item_edit_view' list.id item.id %}">Edit</a>
         <button data-item-id="{{ item.id }}">Complete</button>
         {% endif %}
     </div>

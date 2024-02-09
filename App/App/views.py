@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseBadRequest
 from django.views.generic import ListView
 from .models import ToDoItem, ToDoList
 from django.http import HttpResponse
@@ -58,9 +59,54 @@ def create_list_view(request):
         name = request.POST['name']
         description = request.POST['description']
         list = ToDoList.objects.create(user=request.user, name=name, description=description)
-        return redirect('list_detail_view', list_id=list.id)
+        return redirect('list_view')
     else:
         return render(request, 'create_list_view.html')
+
+@login_required
+def list_edit_view(request, list_id):
+    list = ToDoList.objects.get(id=list_id)
+
+    if request.method == 'GET':
+        return render(request, 'list_edit_view.html', {'list': list})
+
+    elif request.method == 'POST':
+        name = request.POST.get('name')
+        description = request.POST.get('description')
+
+        if not name:
+            return HttpResponseBadRequest("List name is required.")
+
+        list.name = name
+        list.description = description
+        list.save()
+        return redirect('list_view')
+
+    return render(request, '404.html', status=404)
+
+@login_required
+def item_edit_view(request, list_id, item_id):
+    item = ToDoItem.objects.get(id=item_id)
+
+    if request.method == 'GET':
+        return render(request, 'item_edit_view.html', {'item': item, 'list_id': list_id})
+
+    elif request.method == 'POST':
+        text = request.POST.get('text')
+        due_date = request.POST.get('due_date')
+        is_completed = request.POST.get('is_completed') == 'on'
+
+        if not text:
+            return HttpResponseBadRequest("Item text is required.")
+
+        item.text = text
+        item.due_date = due_date
+        item.is_completed = is_completed
+        item.save()
+
+        return redirect('list_detail_view', list_id)
+
+    return render(request, '404.html', status=404)
 
 @login_required
 def create_item_view(request, list_id):
