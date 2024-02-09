@@ -16,7 +16,13 @@
         <label for="due_date">Due Date:</label>
         <input type="date" name="due_date" id="due_date">
         <br>
+        <input type="hidden" name="list_id" value="{{ list.id }}">
         <button type="submit">Add Item</button>
+    </form>
+    <a href="{% url 'list_detail_view' list.id %}">Back</a>
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
     </form>
 </body>
 </html>

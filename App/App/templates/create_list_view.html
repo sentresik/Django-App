@@ -18,5 +18,10 @@
         <br>
         <button type="submit">Create List</button>
     </form>
+    <a href="{% url 'list_view' %}">Back</a>
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
 </body>
 </html>

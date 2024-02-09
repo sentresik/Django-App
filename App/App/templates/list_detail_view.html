@@ -10,12 +10,46 @@
 <body>
     <h1>{{ list.name }}</h1>
     <p>{{ list.description }}</p>
-    <ul>
-        {% for item in items %}
-        <li>
-            <a href="#">{{ item.text }}</a> &nbsp; (Due: {{ item.due_date }})
-        </li>
-        {% endfor %}
-    </ul>
+    <input type="hidden" id="list-id" value="{{ list.id }}">
+    {% for item in items %}
+    <div class="item-container">
+        {% if not item.is_completed %}
+        <a href="#">{{ item.text }}</a>
+        &nbsp; (Due: {{ item.due_date }})
+        <button data-item-id="{{ item.id }}">Complete</button>
+        {% endif %}
+    </div>
+    {% endfor %}
+    <a href="{% url 'create_item_view' list.id %}">Add Item</a>
+    <a href="{% url 'list_view' %}">Back</a>
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+    <script>
+        const listId = document.getElementById('list-id').value;
+
+        document.querySelectorAll('button[data-item-id]').forEach(button => {
+            button.addEventListener('click', async () => {
+                const itemId = button.dataset.itemId;
+                const url = `/list/${listId}/item/${itemId}/complete/`;
+
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                });
+
+                if (response.ok) {
+                    button.parentNode.classList.add('completed');
+                    window.location.reload();
+                } else {
+                    console.error('Error marking item as complete:', await response.text());
+                }
+            });
+        });
+    </script>
 </body>
 </html>
+
