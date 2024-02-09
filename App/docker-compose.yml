@@ -1,6 +1,24 @@
 version: '3.9'
 
 services:
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+      MYSQL_ROOT_PASSWORD: pass
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - app_mynetwork
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping"]
+      interval: 5s
+      retries: 5
+
   django:
     image: django-docker:0.0.1
     build: .
@@ -8,20 +26,9 @@ services:
       - "8000:8000"
     networks:
       - app_mynetwork
-
-  mysql:
-    image: mysql:8.0
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_DATABASE: mydatabase
-      MYSQL_USER: user   
-      MYSQL_PASSWORD: pass
-      MYSQL_ROOT_PASSWORD: pass
-    volumes:
-      - mysql-data:/var/lib/mysql
-    networks:
-      - app_mynetwork
+    depends_on:
+      - mysql
+    command: ["sh", "-c", "wait-for-it mysql:3306 --timeout=60; python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
 
 volumes:
   mysql-data:
