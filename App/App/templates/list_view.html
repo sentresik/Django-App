@@ -10,13 +10,61 @@
 </head>
 <body>
     <h1>My To-Do Lists</h1>
+    <input type="hidden" id="list-id" value="{{ list.id }}">
     <div class="list-container">
         {% for list in lists %}
         <div class="list-item">
             <a href="{% url 'list_detail_view' list.id %}">{{ list.name }}</a>
+            {% csrf_token %}
+            <a href="{% url 'list_edit_view' list.id %}">Edit</a>
+            <button data-list-id="{{ list.id }}" class="delete-list-button">Delete</button>
         </div>
         {% endfor %}
     </div>
     <a href="{% url 'create_list_view' %}">Create New List</a>
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+    <script>
+        const listId = document.getElementById('list-id').value;
+        const deleteButtons = document.querySelectorAll('.delete-list-button');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const listId = button.dataset.listId;
+
+                const csrftoken = getCookie('csrftoken');
+
+                fetch(`/lists/${listId}/delete/`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRFToken': csrftoken,
+                    },
+                })
+                    .then(() => {
+                        button.parentElement.remove();
+                    })
+                    .catch(error => {
+                        console.error('Error deleting list:', error);
+                    });
+            });
+        });
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    </script>
 </body>
 </html>

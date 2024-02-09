@@ -8,6 +8,8 @@
 </head>
 <body>
     <h1>Edit Item: {{ item.text }}</h1>
+    <input type="hidden" id="list-id" value="{{ list.id }}">
+    <input type="hidden" id="item-id" value="{{ item.id }}">
     <form method="post">
         {% csrf_token %}
         <label for="text">Text:</label>
@@ -16,10 +18,12 @@
         <label for="due_date">Due Date:</label>
         <input type="date" name="due_date" id="due_date" value="{{ item.due_date }}">
         <br>
-        <input type="checkbox" name="is_completed" id="is_completed" {% if item.is_completed %}checked{% endif %}>
-        <label for="is_completed">Mark as Completed</label>
-        <br>
         <button type="submit">Save Changes</button>
+    </form>
+    <a href="{% url 'list_detail_view' list_id %}">Back</a>
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
     </form>
 </body>
 </html>

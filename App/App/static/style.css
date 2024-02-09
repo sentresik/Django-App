@@ -85,3 +85,11 @@ button {
 span {
     display: none
 }
+
+#text {
+    font-size: 16px;
+    font-family: 'Pacifico', cursive;
+    color: #CCC;
+    margin: 0 auto;
+    display: block;
+}
