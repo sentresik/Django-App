@@ -2,24 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create New Item for {{ list.name }}</title>
+    <title>Create new item for {{ list.name }}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Create New Item for {{ list.name }}</h1>
+    <h1>Create new item for {{ list.name }}</h1>
     <form method="post">
         {% csrf_token %}
-        <label for="text">Text:</label>
+        <label for="text">Task name:</label>
         <input type="text" name="text" id="text" required>
         <br>
-        <label for="due_date">Due Date:</label>
-        <input type="date" name="due_date" id="due_date">
-        <br>
+<!--        <label for="due_date">Due Date:</label>-->
+<!--        <input type="date" name="due_date" id="due_date">-->
+<!--        <br>-->
         <input type="hidden" name="list_id" value="{{ list.id }}">
-        <button type="submit">Add Item</button>
+        <button type="submit">Add item to the list</button>
     </form>
     <a href="{% url 'list_detail_view' list.id %}">Back</a>
     <form action="{% url 'logout' %}" method="post">

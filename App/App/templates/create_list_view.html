@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create New List</title>
+    <title>Create new list</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Create New List</h1>
+    <h1>Create new list</h1>
     <form method="post">
         {% csrf_token %}
         <label for="name">Name of Your list:</label>
@@ -18,7 +18,9 @@
         <label for="description">Description (optional):</label>
         <textarea name="description" id="description"></textarea>
         <br>
-        <button type="submit">Create list</button>
+        <div class="d-flex justify-content-center">
+            <button type="submit">Create list</button>
+        </div>
     </form>
     <a href="{% url 'list_view' %}">Back</a>
     <form action="{% url 'logout' %}" method="post">

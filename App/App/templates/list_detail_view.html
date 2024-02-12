@@ -6,6 +6,8 @@
     <title>List Details</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <h1>{{ list.name }}</h1>
@@ -15,7 +17,7 @@
     <div class="item-container">
         {% if not item.is_completed %}
         <a href="#">{{ item.text }}</a>
-        &nbsp; (Due: {{ item.due_date }})
+        &nbsp; <!--(Due: {{ item.due_date }})-->
         <a href="{% url 'item_edit_view' list.id item.id %}">Edit</a>
         <button data-item-id="{{ item.id }}">Complete</button>
         {% endif %}

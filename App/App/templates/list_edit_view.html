@@ -5,18 +5,22 @@
     <title>Edit List</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <h1>Edit List</h1>
     <form method="post">
         {% csrf_token %}
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name" required>
+        <label for="name">Name of the list:</label>
+        <input type="text" name="name" id="name" value="{{ list.name }}" required>
         <br>
-        <label for="description">Description (Optional):</label>
+        <label for="description">Description (optional):</label>
         <textarea name="description" id="description"></textarea>
         <br>
-        <button type="submit">Confirm</button>
+        <div class="d-flex justify-content-center">
+            <button type="submit">Confirm</button>
+        </div>
     </form>
     <a href="{% url 'list_view' %}">Back</a>
     <form action="{% url 'logout' %}" method="post">

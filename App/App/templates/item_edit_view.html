@@ -1,10 +1,12 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Edit Item: {{ item.text }}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <h1>Edit Item: {{ item.text }}</h1>
@@ -12,13 +14,15 @@
     <input type="hidden" id="item-id" value="{{ item.id }}">
     <form method="post">
         {% csrf_token %}
-        <label for="text">Text:</label>
+        <label for="text">Task name:</label>
         <input type="text" name="text" id="text" value="{{ item.text }}" required>
         <br>
-        <label for="due_date">Due Date:</label>
+    <!--    <label for="due_date">Due Date:</label>
         <input type="date" name="due_date" id="due_date" value="{{ item.due_date }}">
-        <br>
-        <button type="submit">Save Changes</button>
+        <br>-->
+        <div class="d-flex justify-content-center">
+            <button type="submit">Save Changes</button>
+        </div>
     </form>
     <a href="{% url 'list_detail_view' list_id %}">Back</a>
     <form action="{% url 'logout' %}" method="post">

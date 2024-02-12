@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <title>Register</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>ToDo App</h1>
+    <h1>To-Do App</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Register</button>
+        <div class="d-flex justify-content-center">
+            <button type="submit">Register</button>
+        </div>
     </form>
     <a href="{% url 'index' %}">Back</a>
 </body>
