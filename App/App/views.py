@@ -100,7 +100,6 @@ def item_edit_view(request, list_id, item_id):
             return HttpResponseBadRequest("Item text is required.")
 
         item.text = text
-        item.due_date = due_date
         item.is_completed = is_completed
         item.save()
 
