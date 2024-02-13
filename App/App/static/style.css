@@ -15,6 +15,7 @@ h1 {
     font-family: 'Kalam';
     color: #CCC;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 a {
@@ -145,4 +146,8 @@ span {
 
 .justify-content-center {
     justify-content: center;
+}
+
+input[type="text"] {
+    color: black !important;
 }

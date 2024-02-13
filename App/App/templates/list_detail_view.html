@@ -23,7 +23,7 @@
         {% endif %}
     </div>
     {% endfor %}
-    <a href="{% url 'create_item_view' list.id %}">Add Item</a>
+    <a href="{% url 'create_item_view' list.id %}">Add item</a>
     <a href="{% url 'list_view' %}">Back</a>
     <form action="{% url 'logout' %}" method="post">
         {% csrf_token %}
