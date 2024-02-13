@@ -21,13 +21,14 @@ System operacyjny:
  
 
 INSTRUKCJA URUCHOMIENIA PROGRAMU:
-1. Pobierz repozytorium na swoje urządzenie i przejdź do folderu z projektem.
-2. Otwórz CMD/terminal na scieżce Django-App/App
-3. Postaw i uruchom kontener bazy danych wpisując komendę:
+1. Pobierz repozytorium na swoje urządzenie, rozpakuj paczkę i przejdź do folderu z projektem.
+2. Uruchom Dockera.
+3. Otwórz CMD/terminal na scieżce Django-App/App (WAŻNE: musisz być w folderze App)
+4. Postaw i uruchom kontener bazy danych wpisując komendę:
 	docker-compose up mysql -d --build
-4. Postaw i uruchom kontener aplikacji wpisując komendę:
+5. Postaw i uruchom kontener aplikacji wpisując komendę:
 	docker-compose up django -d --build
-5. Otwórz w dowolnej przeglądarce ścieżkę http://localhost:8000
+6. Otwórz w dowolnej przeglądarce ścieżkę http://localhost:8000
 
 
 OPIS KORZYSTANIA Z APLIKACJI:
